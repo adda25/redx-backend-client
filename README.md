@@ -21,4 +21,5 @@ redxRegisterRequest({
 ```
 
 You must use the URL as show: protocol[://]host[:]port
+
 Availables protocols are *http* and *https*
