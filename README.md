@@ -12,7 +12,7 @@ let redxRegisterRequest = require('@tsadda25/redx-backend-client')
 
 redxRegisterRequest({ 
 	src: 'http://localhost:8283', // Redx host
-	dst: 'http://localhost:4003', // Service host (this)
+	service: {host: '192.168.1.1', port: 4003, protocol: 'http'}
 	secret: '21137818784737'
 }, (value) => {
 	// True if registration success, otherwise false
@@ -20,6 +20,24 @@ redxRegisterRequest({
 })
 ```
 
-You must use the URL as show: protocol[://]host[:]port
+For the source, you must use the URL as show: protocol[://]host[:]port.
+
+Secret can be undefined; service.host and service.protocol can be undefined.
 
 Availables protocols are *http* and *https*
+
+If no service host is provided, RedX server will try to get the service IP address
+from the request info.
+
+```js
+let redxRegisterRequest = require('@tsadda25/redx-backend-client')
+
+redxRegisterRequest({ 
+	src: 'http://localhost:8283', // Redx host
+	service: {port: 4003}
+	secret: '21137818784737'
+}, (value) => {
+	// True if registration success, otherwise false
+	console.log(value)
+})
+```

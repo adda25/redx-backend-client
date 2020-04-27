@@ -13,7 +13,7 @@ function parse (address) {
 class HttpRequest {
 
     register (x, cb) {
-        let protocol = parse(x.src).protocol
+        let protocol = parse(x.src).protocol || 'http'
         protocol == 'https' ? 
             this._request(https, x, cb) :
             this._request(http, x, cb)
@@ -21,8 +21,12 @@ class HttpRequest {
 
     _request (client, x, cb) {
         let src = parse(x.src)
-        let _dst = parse(x.dst)
-        let dst = _dst.protocol == 'https' ? 'ssl ' + _dst.host + ':' + _dst.port : _dst.host + ':' + _dst.port
+        let dst = ''
+        let host = 'redx-self'
+        if (x.service.host !== undefined) {
+            host = x.service.host
+        }
+        dst = x.service.protocol == 'https' ? 'ssl ' + host + ':' + x.service.port : host + ':' + x.service.port
         let data = undefined
         if (x.secret == undefined) {
             data = dst

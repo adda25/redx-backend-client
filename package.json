@@ -1,6 +1,6 @@
 {
   "name": "@tsadda25/redx-backend-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Redx backend client for auto registration of services",
   "keywords": [
   	"redx",
