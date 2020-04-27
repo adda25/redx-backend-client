@@ -5,9 +5,11 @@ const https = require('https')
 
 function parse (address) {
     let protocol = address.split('://')[0]
-    let port = address.split('://')[1].split(':')[1]
+    let port = address.split('://')[1].split(':')[1].split('/')[0]
+    let location = address.split('://')[1].split(':')[1].split('/')[1]
+    location = location == undefined ? '' : location
     let host = address.split('://')[1].split(':')[0]
-    return {host: host, port: port, protocol: protocol}
+    return {host: host, port: port, protocol: protocol, location: location}
 }
 
 class HttpRequest {
@@ -33,11 +35,14 @@ class HttpRequest {
         } else {
             data = dst + '::' + x.secret
         }
+        let loc = src.location[src.location - 1] == '/' ? src.location + 'redx/register' : src.location + '/redx/register'
+        loc = loc[0] !== '/' ? '/' + loc : loc
+        console.log(loc)
         try {
             const options = {
               hostname: src.host,
               port: src.port,
-              path: '/redx/register',
+              path:  loc,
               method: 'POST',
               headers: {
                 'Content-Type': 'text',
