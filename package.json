@@ -1,0 +1,23 @@
+{
+  "name": "redx-backend-client",
+  "version": "0.0.1",
+  "description": "Redx backend client for auto registration of services",
+  "keywords": [
+  	"redx",
+  	"auto discover",
+    "web server",
+    "application server",
+    "server"
+  ],
+  "main": "index.js",
+  "scripts": {
+  	"start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adda25/redx-backend-client.git"
+  },
+  "author": "Amedeo Setti (http://amedeosetti.com), ProM Facility (https://promfacility.eu)",
+  "license": "MIT"
+}
