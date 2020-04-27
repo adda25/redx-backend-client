@@ -14,6 +14,13 @@ function parse (address) {
 
 class HttpRequest {
 
+    registerWithLoop (x, cb, time) {
+        this.register (x, cb)
+        setInterval(function () {
+            this.register (x, cb)
+        }.bind(this), time || 10000)
+    }
+
     register (x, cb) {
         let protocol = parse(x.src).protocol || 'http'
         protocol == 'https' ? 
@@ -37,7 +44,6 @@ class HttpRequest {
         }
         let loc = src.location[src.location - 1] == '/' ? src.location + 'redx/register' : src.location + '/redx/register'
         loc = loc[0] !== '/' ? '/' + loc : loc
-        console.log(loc)
         try {
             const options = {
               hostname: src.host,
